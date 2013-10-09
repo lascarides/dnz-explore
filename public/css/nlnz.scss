@@ -1,0 +1,179 @@
+@mixin border-radius($a: false, $b: false, $c: false, $d: false, $top-left: 0, $top-right: 0, $bottom-right: 0, $bottom-left: 0, $top: false, $bottom: false, $right: false, $left: false, $radius: false) {
+
+  // Handle shorthand notation like CSS3 would
+  // You shouldn't explictly set these variables when calling the mixin
+  @if $d { $radius: $a $b $c $d; }
+  @else if $c { $radius: $a $b $c; }
+  @else if $b { $radius: $a $b; }
+  @else if $a { $radius: $a; }
+
+  @else {
+
+    // Target individual corners (or groups) instead of using CSS3 shorthand
+    @if $top { $top-left: $top; $top-right: $top; }
+    @if $bottom { $bottom-right: $bottom; $bottom-left: $bottom; }
+    @if $left { $top-left: $left; $bottom-left: $left; }
+    @if $right { $top-right: $right; $bottom-right: $right; }
+
+    // Set the radius
+    $radius: $top-left $top-right $bottom-right $bottom-left;
+  }
+
+  // Webkit, Mozilla, KHTML and standard CSS3
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -khtml-border-radius: $radius;
+  border-radius: $radius; 
+
+}
+
+@mixin linear-gradient($from, $to, $ie: 0) {
+
+  @if $ie != 1 { background-color: $to; }
+  
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(1, $to));
+  background-image: -webkit-linear-gradient(top, $from, $to);
+  background-image: -moz-linear-gradient(top, $from, $to);
+  background-image: -ms-linear-gradient(top, $from, $to);
+  background-image: -o-linear-gradient(top, $from, $to);
+  background-image: linear-gradient(top, bottom, $from, $to);
+
+  @if $ie == 1 { 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+  }
+}
+
+
+$isotope_item_width: 20px;
+$isotope_item_height: 50px;
+$isotope_item_margin_width: 2px;
+
+body {
+	background: #222;
+	color: #fff;
+	font-family: 'Helvetica Neue';
+}
+
+#controls {
+	padding: 0.5em;
+	background: #000;
+	margin: 0 0 $isotope_item_margin_width 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100000;
+}
+
+.iso-canvas {
+	margin-top: 3em;
+	padding-bottom: $isotope_item_height;
+}
+
+.tiny-item {
+	@include border-radius(8px);
+	width: 15px;
+	height: 15px;
+	margin: 0 2px 2px 0;
+	background: #444;
+	color: #fff; 
+	overflow: hidden;
+	.coll-name, .coll-parent-name, .details {
+		display: none;
+	}
+}
+
+.item {
+	height: $isotope_item_height;
+	background: #444;
+	margin: 0 $isotope_item_margin_width $isotope_item_margin_width 0;
+	overflow: hidden;
+	width: $isotope_item_width;
+	.coll-name {
+		font-size: 9px;
+		font-weight: bold;
+		padding: 0.5em 0.5em 0 5px;
+		line-height: 1.2;
+		max-height: 2.4em;
+		overflow: hidden;
+	}
+	.coll-parent-name {
+		font-size: 6px;
+		color: #000;
+		padding: 0 0.5em 0.5em 5px;
+		line-height: 1.2;
+		max-height: 2.4em;
+	}
+	.details {
+		display: none;
+	}
+}
+
+$i: 1;
+@while $i < 50 {
+  .item_#{$i} { 
+  	width: ($i * $isotope_item_width) + (($i - 1) * $isotope_item_margin_width); 
+  }
+  $i: $i + 1;
+}
+
+.item-highlight {
+	position: relative;
+	width: 100% !important;
+	height: $isotope_item_height * 5;
+	font-size: 18px;
+	@include border-radius(10px);
+	.coll-name, .coll-parent-name {
+		font-size: 24px;
+		width: 50%;
+		max-height: 3.6em;
+		padding: 0.8em 1em 0 1em;
+		display: block;
+	}
+	.details {
+		display: block;
+		position: absolute;
+		top: 1em;
+		width: 40%;
+		left: 55%;
+	}
+}
+
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}

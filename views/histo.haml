@@ -1,0 +1,22 @@
+#controls
+	Sort by 
+	%a.btn.btn-small#sort_org Organization
+	%a.btn.btn-small#sort_collection Collection
+	%a.btn.btn-small#sort_size Size
+
+	one dot == 10000 items
+#histo.iso-canvas
+	- collections.each do |coll|
+		- coll[:item_dot_count].times do 
+			.tiny-item{ style: "background:##{coll[:org_color]}", 'data-coll-size' => coll[:item_count], 'data-coll-name' => coll[:collection_group_name], 'data-org' => coll[:org_name] }
+				.coll-name= coll[:collection_name]
+				- if coll[:collection_name] != coll[:collection_group_name]
+					.coll-parent-name= coll[:collection_group_name]
+				.details
+					.detail
+						= coll[:item_count]
+						items.
+					.detail
+						Belongs to 
+						%a{href: "http://digitalnz.org/records?i%5Bcontent_partner%5D=#{coll[:org_name].gsub(' ', '+')}"}
+							= coll[:org_name]

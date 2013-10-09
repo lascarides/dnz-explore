@@ -1,0 +1,23 @@
+#controls
+	Sort by 
+	%a.btn.btn-small#sort_org Organization
+	%a.btn.btn-small#sort_collection Collection
+	%a.btn.btn-small#sort_size Size
+#playground.iso-canvas
+	- collections.each do |coll|
+		.item{ class: "item_#{coll[:item_magnitude]}", style: "background:##{coll[:org_color]}", 'data-coll-size' => coll[:item_count], 'data-coll-name' => coll[:collection_group_name], 'data-org' => coll[:org_name] }
+			.coll-name= coll[:collection_name]
+			.coll-parent-name
+				- if coll[:collection_name] != coll[:collection_group_name]
+					= coll[:collection_group_name]
+				- if coll[:collection_name] != coll[:org_name] and coll[:collection_group_name] != coll[:org_name]
+					<br>
+					= "#{coll[:org_name]}"
+			.details
+				.detail
+					There are 
+					= coll[:item_count]
+					items in this collection.
+					It belongs to 
+					%a{href: "http://digitalnz.org/records?i%5Bcontent_partner%5D=#{coll[:org_name].gsub(' ', '+')}"}
+						= coll[:org_name]
