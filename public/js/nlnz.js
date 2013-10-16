@@ -19,6 +19,9 @@ $(document).ready(function() {
 			count : function ( $elem ) {
 				return parseInt($elem.attr('data-coll-size'));
 			},
+			format : function ( $elem ) {
+				return $elem.attr('data-format');
+			},
 			coll : function ( $elem ) {
 				return $elem.attr('data-coll-name');
 			}
@@ -51,6 +54,10 @@ $(document).ready(function() {
 	});
 	$('#sort_size').click(function() {
 		$('.iso-canvas').isotope({ sortBy : 'count' });
+		return false;
+	});
+	$('#sort_format').click(function() {
+		$('.iso-canvas').isotope({ sortBy : 'format' });
 		return false;
 	});
 
