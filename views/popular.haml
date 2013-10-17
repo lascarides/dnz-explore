@@ -4,8 +4,8 @@
 
 	- items.each_with_index do |item, i|
 		- if item[3].nil?
-			.item
+			.popitem
 				%a{href: item[2]}= "##{i + 1}. #{item[4]}"
 		- else
-			.item{style: "background-image:url(#{item[3]})"}
+			.popitem{style: "background-image:url(#{item[3]})"}
 				%a{href: item[2]}= "##{i + 1}."

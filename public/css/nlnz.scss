@@ -145,13 +145,13 @@ $i: 1;
 	}
 	padding: 1em;
 	overflow: hidden;
-	.item {
+	.popitem {
 		background: 50% 50% #444 scroll no-repeat;
-		background-size: cover;
-		width: 100px;
-		height: 100px;
+		background-size: contain;
+		width: 130px;
+		height: 130px;
 		font-size: 0.8em;
-		padding: 5px;
+		padding: 0.6em;
 		margin: 0 3px 3px 0;
 		float: left;
 		line-height: 1.4;

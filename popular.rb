@@ -27,7 +27,7 @@ end
 # ]
 
 coll = CSV.generate(:col_sep => "\t") do |csv|
-	CSV.foreach("data/popular-test.csv", { :col_sep => "\t" }) do |row|
+	CSV.foreach("data/popular.csv", { :col_sep => "\t" }) do |row|
 		record = get_record(row[0])
 		csv << [
 			row[0],
