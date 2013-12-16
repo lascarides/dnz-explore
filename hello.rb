@@ -3,12 +3,15 @@
 require 'rubygems'
 require "bundler/setup"
 require 'sinatra'
+require 'nokogiri'
 require 'haml'
 require 'json'
 require 'net/http'
 require 'yaml'
 require 'csv'
 require 'digest/sha1'
+require 'open-uri'
+
 
 set :static, true
 set :root, File.dirname(__FILE__)
@@ -30,6 +33,14 @@ end
 
 get '/histo' do
 	haml :histo, locals: { collections: fetch_collection_details }
+end
+
+get '/xmas' do
+	# Christmas Set
+	# http://www.digitalnz.org/user_sets/52aa17538d2a4e8fcc00001d.xml
+	doc = Nokogiri::Slop(open("http://www.digitalnz.org/user_sets/52aa17538d2a4e8fcc00001d.xml"))
+	doc.remove_namespaces!
+	haml :xmas, locals: { records: doc.xpath('//record') }
 end
 
 def fetch_collection_details

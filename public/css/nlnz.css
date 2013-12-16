@@ -239,6 +239,24 @@ body {
     font-weight: bold;
     overflow: hidden; }
 
+.xmas .carousel, .xmas .carousel-inner, .xmas .item {
+  width: 1024px;
+  height: 768px; }
+.xmas .item {
+  text-align: center; }
+  .xmas .item img {
+    display: inline;
+    height: 768px; }
+.xmas .carousel, .xmas #christmas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -384px;
+  margin-left: -512px; }
+.xmas .carousel-caption {
+  font-family: Futura, Calibri, Arial, sans-serif;
+  text-transform: uppercase; }
+
 /**** Isotope Filtering ****/
 .isotope-item {
   z-index: 2; }

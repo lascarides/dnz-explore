@@ -4,8 +4,8 @@
 	%a.btn.btn-small#sort_collection Collection
 	%a.btn.btn-small#sort_size Size
 	%a.btn.btn-small#sort_format Format
-	.filters
-		<a href="#" data-filter="*">show all</a>
+	/ .filters
+	/ 	<a href="#" data-filter="*">show all</a>
 #playground.iso-canvas
 	- collections.each do |coll|
 		.item{ class: "item_#{coll[:item_magnitude]}", style: "background:##{coll[:org_color]};border-bottom:2px solid ##{coll[:format_color]}", 'data-coll-size' => coll[:item_count], 'data-format' => coll[:format], 'data-coll-name' => coll[:collection_group_name], 'data-org' => coll[:org_name] }

@@ -1,0 +1,14 @@
+.xmas
+	#carousel.carousel.slide
+		.carousel-inner
+			- records.each do |record|
+				.item
+					%img{ :src => record.large_thumbnail.text }
+					.carousel-caption
+						%strong= record.title.text
+						= record.publisher.text
+	#christmas
+		%img{:src => '/img/christmas.png'}
+
+:javascript
+	$(document).ready(function(){$('.carousel').carousel({interval:6000});});
