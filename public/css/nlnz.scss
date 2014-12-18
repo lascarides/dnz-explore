@@ -185,6 +185,17 @@ $i: 1;
 	}
 }
 
+.accesscodes {
+	.code_ok {
+		font-weight: bold;
+		color: #090;
+	}
+	.code_caution {
+		font-weight: bold;
+		color: #a00;
+	}
+}
+
 /**** Isotope Filtering ****/
 
 .isotope-item {

@@ -257,6 +257,13 @@ body {
   font-family: Futura, Calibri, Arial, sans-serif;
   text-transform: uppercase; }
 
+.accesscodes .code_ok {
+  font-weight: bold;
+  color: #090; }
+.accesscodes .code_caution {
+  font-weight: bold;
+  color: #a00; }
+
 /**** Isotope Filtering ****/
 .isotope-item {
   z-index: 2; }

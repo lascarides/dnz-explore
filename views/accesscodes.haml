@@ -1,0 +1,32 @@
+.accesscodes.container
+	.row
+		.span12
+			%h1 Sample Access Codes API
+
+			%h2 The access spaces
+
+			%ul 
+				- access_spaces.each_with_index do |space, i|
+					%li= "#{i}00: #{space}"
+
+			%h2 Possible Yes/No questions
+
+			%ul 
+				- access_questions.each_with_index do |question, i|
+					%li= "Bit #{i+1}: #{question}"
+
+			%h2 Code Lookup
+			%form{:method => 'get'}
+				%input{:type => 'text', :name => 'access_code', :value => params[:access_code]}
+				%input{:type => 'submit'}
+
+			- unless @statement.nil?
+				- if @statement[:error]
+					= @statement[:error]
+				- else
+					%h2
+						= "Code #{params[:access_code]}:  #{@statement[:message]}"
+					%ul
+						- @statement[:details].each do |detail|
+							%li{ :class => detail[:outcome] ? 'code_caution' : 'code_ok'}
+								= detail[:message]
